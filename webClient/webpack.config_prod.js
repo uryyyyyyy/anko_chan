@@ -1,7 +1,7 @@
 var webpack = require("webpack");
-
 module.exports = {
   entry: [
+    './src/App.tsx'
   ],
   output: {
     path: 'build/',
@@ -12,7 +12,10 @@ module.exports = {
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
+    'jquery': '$',
+    'bluebird': 'Promise',
+    'lodash': '_'
   },
   module: {
     loaders: [
@@ -27,4 +30,3 @@ module.exports = {
     new webpack.optimize.DedupePlugin()
   ]
 };
-

@@ -13,6 +13,11 @@ export class Status {
 }
 
 export function getAllStatus():Promise<Array<Status>>{
-	let url = "webAPI/getAllStatus.json";
+	let url = "https://qzurklbmoc.execute-api.ap-northeast-1.amazonaws.com/prod/getAllStatus";
 	return http.getJson(url).then(v => _.map(v, (vv:any) => new Status(vv.id, vv.name, vv.topic, vv.active)));
+}
+
+export function getPostStatus(s:Status):Promise<any>{
+	let url = "https://z6ucxjagyk.execute-api.ap-northeast-1.amazonaws.com/prod/Anko_Chan_update";
+	return http.postJson(url, s);
 }

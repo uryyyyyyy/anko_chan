@@ -14,7 +14,7 @@ export class TopComponent extends React.Component<{}, State> {
 	}
 
 	post(s:Status): void{
-		console.log(s);
+		Util.getPostStatus(s).then(v => console.log(v));
 	}
 
 	render() {
