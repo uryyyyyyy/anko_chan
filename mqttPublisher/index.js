@@ -5,7 +5,7 @@ var AWS = require('aws-sdk');
 
 //access dynamo
 
-var func = function(cb){
+var func = function(device, context){
     var dynamodb = new AWS.DynamoDB({region: 'ap-northeast-1'});
 
     var params = {
@@ -15,9 +15,19 @@ var func = function(cb){
 
     dynamodb.scan(params, function (err, res) {
         res.Items.forEach(function(v){
-            var ss = {active: v.active.BOOL, topic: v.topic.S};
-            cb(ss)
+            var status = {active: v.active.BOOL, topic: v.topic.S};
+            console.log('publish: ' + status.topic);
+            device.publish(status.topic, JSON.stringify({
+                active: status.active }));
         });
+
+        var close = function(){
+            device.end();
+            if(context){
+                context.succeed("finish" + res);
+            }
+        };
+        setTimeout(close,1000);
     });
 };
 
@@ -30,37 +40,18 @@ const device = deviceModule({
     //reconnectPeriod: reconnectPeriod
 });
 
+device.on('error', function(error) {
+    console.log('error', error);
+});
 
-//begin module
 function processTest(status) {
-
-    device
-        .on('connect', function() {
-            console.log('connect: ' + status.topic);
-            device.publish(status.topic, JSON.stringify({
-                active: status.active }));
-        });
-    device
-        .on('close', function() {
-            console.log('close');
-        });
-    device
-        .on('reconnect', function() {
-            console.log('reconnect');
-        });
-    device
-        .on('offline', function() {
-            console.log('offline');
-            count=0;
-        });
-    device
-        .on('error', function(error) {
-            console.log('error', error);
-        });
-    device
-        .on('message', function(topic, payload) {
-            console.log('message', topic, payload.toString());
-        });
+    console.log('publish: ' + status.topic);
+    device.publish(status.topic, JSON.stringify({
+        active: status.active }));
 }
 
-func(processTest);
+//func(device);
+
+exports.handler = function(event, context) {
+    func(device, context);
+};
