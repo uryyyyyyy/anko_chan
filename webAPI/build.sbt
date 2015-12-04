@@ -8,12 +8,12 @@ lazy val commonSettings = Seq(
 lazy val core = (project in file("core")).
 		settings(commonSettings: _*)
 
-lazy val getAllStatus = (project in file("getAllStatus")).
+lazy val status = (project in file("status")).
 		settings(commonSettings: _*).dependsOn(core % "test->test;compile->compile")
 //		.settings(unmanagedSourceDirectories in Compile <++= unmanagedSourceDirectories in (core, Compile))
 //		.settings(unmanagedSourceDirectories in Test <++= unmanagedSourceDirectories in (core, Test))
 
-lazy val changeStatus = (project in file("changeStatus")).
+lazy val topic = (project in file("topic")).
 		settings(commonSettings: _*).dependsOn(core % "test->test;compile->compile")
 //		.settings(unmanagedSourceDirectories in Compile <++= unmanagedSourceDirectories in (core, Compile))
 //		.settings(unmanagedSourceDirectories in Test <++= unmanagedSourceDirectories in (core, Test))
