@@ -1,13 +1,19 @@
-name := """warikan"""
 
-lazy val root = (project in file(".")).settings(
-  name := "aws-lambda-scala",
-  version := "1.0",
-  organization := "com.example",
-  scalaVersion := "2.11.7",
-  libraryDependencies ++= Seq(
-    "com.amazonaws" % "aws-lambda-java-core" % "1.0.0",
-    "com.amazonaws" % "aws-lambda-java-events" % "1.1.0",
-    "org.scalatest" %% "scalatest" % "2.2.5" % "test"
-  )
+lazy val commonSettings = Seq(
+	organization := "com.github.uryyyyyyy",
+	version := "0.1.0",
+	scalaVersion := "2.11.7"
 )
+
+lazy val core = (project in file("core")).
+		settings(commonSettings: _*)
+
+lazy val getAllStatus = (project in file("getAllStatus")).
+		settings(commonSettings: _*).dependsOn(core % "test->test;compile->compile")
+//		.settings(unmanagedSourceDirectories in Compile <++= unmanagedSourceDirectories in (core, Compile))
+//		.settings(unmanagedSourceDirectories in Test <++= unmanagedSourceDirectories in (core, Test))
+
+lazy val changeStatus = (project in file("changeStatus")).
+		settings(commonSettings: _*).dependsOn(core % "test->test;compile->compile")
+//		.settings(unmanagedSourceDirectories in Compile <++= unmanagedSourceDirectories in (core, Compile))
+//		.settings(unmanagedSourceDirectories in Test <++= unmanagedSourceDirectories in (core, Test))

@@ -1,6 +1,7 @@
-package com.example
+package com.github.uryyyyyyy.anko_chan.api.post.status
 
 import com.amazonaws.services.lambda.runtime.Context
+import com.github.uryyyyyyy.anko_chan.api.core.dto.Topic
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
@@ -10,11 +11,10 @@ object Hello {
 		println("Hello, world!")
 	}
 
-	def hello(list: java.util.List[MyObj], context: Context) = {
+	def change(list: java.util.List[Topic], context: Context) = {
 		println("Hello World!!")
-		val list_ :mutable.Buffer[MyObj] = list
-		list_.map(println(_))
-		println(list)
+		val list_ :mutable.Buffer[Topic] = list
+		list_.foreach(println)
 		list
 	}
 }
