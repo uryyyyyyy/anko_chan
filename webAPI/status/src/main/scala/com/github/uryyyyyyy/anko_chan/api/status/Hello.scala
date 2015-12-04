@@ -16,7 +16,7 @@ import scala.collection.mutable
 object Hello {
 	def main(args: Array[String]): Unit = {
 		println("Hello, world!")
-		getAll(null, null).foreach(println)
+		getAll(null, null).foreach(v => println(v.active))
 	}
 
 	def getAll(ignore: Object, context: Context) = {
@@ -56,13 +56,15 @@ object Hello {
 				.withTableName("mySample")
 
 		val result:ScanResult = client.scan(scanRequest)
-		result.getItems.map(map =>
+		result.getItems.map(map => {
+			println(map)
 			Status(
 				map.get("id").getN.toInt,
 				map.get("name").getS,
 				map.get("topic").getS,
 				map.get("active").getBOOL
-			)).toList
+			)
+		}).toList
 	}
 
 	def toDto(status: Status): StatusDto ={
@@ -70,6 +72,7 @@ object Hello {
 		s.id = status.id
 		s.name = status.name
 		s.topic = status.topic
+		s.active = status.active
 		s
 	}
 
