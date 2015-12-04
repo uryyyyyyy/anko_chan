@@ -1,0 +1,26 @@
+{
+  "name": "nodeJsSamples",
+  "version": "0.0.0",
+  "description": "nodeJsSamples =============",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uryyyyyyy/nodeJsSamples.git"
+  },
+  "author": "uryyyyyyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uryyyyyyy/nodeJsSamples/issues"
+  },
+  "homepage": "https://github.com/uryyyyyyy/nodeJsSamples",
+  "dependencies": {
+    "aws-iot-device-sdk": "^1.0.9"
+  },
+  "devDependencies": {
+    "proxyquire": "^1.7.3",
+    "mocha": "^2.3.4"
+  }
+}
