@@ -35,13 +35,13 @@ export class StatusTableComponent extends React.Component<Props, {}> {
                         <td>1</td>
                         <td>name1</td>
                         <td>topic1</td>
-                        <td><input type="checkbox" name="my-checkbox" defaultChecked={true} /></td>
+                        <td><SlideComponent active={true} change={(v:any) => console.log(v)} /></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>name2</td>
                         <td>topic2</td>
-                        <td><input type="checkbox" name="my-checkbox" /></td>
+                        <td><SlideComponent active={false} change={(v:any) => console.log(v)} /></td>
                     </tr>
                 </tbody>
             </table>

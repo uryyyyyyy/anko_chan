@@ -1,7 +1,7 @@
 
 module.exports = {
   entry: [
-    './src/app.tsx'
+    './src/App.tsx'
   ],
   output: {
     path: 'build/',
