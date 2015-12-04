@@ -13,11 +13,15 @@ export class TopComponent extends React.Component<{}, State> {
 		Util.getAllStatus().then(v => this.setState({list: v})).catch(v => console.log(v));
 	}
 
+	post(s:Status): void{
+		console.log(s);
+	}
+
 	render() {
 		if(this.state){
-			return <div><StatusTableComponent list={this.state.list} /></div>
+			return <div><StatusTableComponent list={this.state.list} change={this.post}/></div>
 		}else{
-			return
+			return <div></div>
 		}
 	}
 }

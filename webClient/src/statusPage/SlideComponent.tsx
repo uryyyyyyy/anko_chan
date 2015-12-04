@@ -4,19 +4,22 @@ import ReactDOM = require('react-dom');
 
 export interface Props {
 	active: boolean;
-	change: Function;
+	change: (s:boolean)=> void;
 }
 
 export interface State {
-	$selector: Element;
+	$selector: JQuery;
 }
 
 export class SlideComponent extends React.Component<Props, State> {
 
 	public componentDidMount(){
 		let selector:Element = ReactDOM.findDOMNode(this);
-		this.setState({$selector: selector});
-		let $select2 = $(selector).bootstrapSwitch();
+		let $selector = $(selector).bootstrapSwitch();
+		this.setState({$selector: $selector});
+		$selector.on('switchChange.bootstrapSwitch', (event, state) => {
+			this.props.change(state);
+		});
 	}
 
 	render() {
