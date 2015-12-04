@@ -1,9 +1,7 @@
-import util = require("../../src/helloWorld/util");
-import assert_ from 'power-assert';
-let assert = assert_; // for fixing "assert" name;
+import util = require("../../src/util/Util");
+import assert = require("assert");
 
 describe('util', () => {
-
     describe('hello()', () => {
         it('should add return [2,3]', () => {
             let result = util.hello("hi");

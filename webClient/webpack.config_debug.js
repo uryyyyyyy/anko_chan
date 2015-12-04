@@ -1,10 +1,10 @@
 
 module.exports = {
   entry: [
-    './src/helloWorld/app.tsx'
+    './src/app.tsx'
   ],
   output: {
-    path: 'build/helloWorld',
+    path: 'build/',
     filename: 'bundle.js'
   },
   devtool: 'inline-source-map',
@@ -13,7 +13,10 @@ module.exports = {
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
+    'jquery': '$',
+    'bluebird': 'Promise',
+    'lodash': '_'
   },
   module: {
     loaders: [

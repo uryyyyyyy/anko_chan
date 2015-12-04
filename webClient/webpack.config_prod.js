@@ -2,10 +2,9 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: [
-    './src/helloWorld/app.tsx'
   ],
   output: {
-    path: 'build/helloWorld',
+    path: 'build/',
     filename: 'bundle.js'
   },
   resolve: {
