@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "../../testBuild/",
+    "noImplicitAny": true,
+    "jsx": "react"
+  },
+  "files": [
+    "./utilTest.ts",
+    "../../typings/tsd.d.ts"
+  ]
+}
