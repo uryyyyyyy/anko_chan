@@ -4,4 +4,5 @@ public class StatusDto {
     public int id;
     public String name;
     public String topic;
+    public boolean active;
 }

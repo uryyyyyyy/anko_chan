@@ -1,25 +1,22 @@
 package com.github.uryyyyyyy.anko_chan.api.status
 
+import java.util
+
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.regions.{Region, Regions}
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient
 import com.amazonaws.services.dynamodbv2.document._
-import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec
-import com.amazonaws.services.dynamodbv2.document.utils.ValueMap
+import com.amazonaws.services.dynamodbv2.model.{ScanRequest, ScanResult}
 import com.amazonaws.services.lambda.runtime.Context
-import com.github.uryyyyyyy.anko_chan.api.core.StatusDto
-import com.github.uryyyyyyy.anko_chan.api.core.objects.Status
+import com.github.uryyyyyyy.anko_chan.api.core.{Status, StatusDto}
 
-import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
 import scala.collection.mutable
-import java.util
 
 object Hello {
 	def main(args: Array[String]): Unit = {
 		println("Hello, world!")
-		val s = Status(1, "name1", "topic1")
-		put(s)
+		getAll(null, null).foreach(println)
 	}
 
 	def getAll(ignore: Object, context: Context) = {
@@ -47,6 +44,7 @@ object Hello {
 				.withPrimaryKey("id", status.id)
 				.withString("name", status.name)
 				.withString("topic", status.topic)
+				.withBoolean("active", status.active)
 		table.putItem(item)
 	}
 
@@ -54,15 +52,17 @@ object Hello {
 		val client = new AmazonDynamoDBClient(new DefaultAWSCredentialsProviderChain())
 		client.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1))
 
-		val dynamoDB: DynamoDB = new DynamoDB(client)
+		val scanRequest:ScanRequest = new ScanRequest()
+				.withTableName("mySample")
 
-		val table: Table = dynamoDB.getTable("mySample")
-
-		val spec:QuerySpec = new QuerySpec()
-				.withKeyConditionExpression("id > -1")
-
-		val items:ItemCollection[QueryOutcome] = table.query(spec)
-		items.iterator().asScala.toList.map(v => Status(v.getInt("id"), v.getString("name"), v.getString("topic")))
+		val result:ScanResult = client.scan(scanRequest)
+		result.getItems.map(map =>
+			Status(
+				map.get("id").getN.toInt,
+				map.get("name").getS,
+				map.get("topic").getS,
+				map.get("active").getBOOL
+			)).toList
 	}
 
 	def toDto(status: Status): StatusDto ={
@@ -74,6 +74,6 @@ object Hello {
 	}
 
 	def toVO(s: StatusDto): Status ={
-		Status(s.id, s.name, s.topic)
+		Status(s.id, s.name, s.topic, s.active)
 	}
 }
