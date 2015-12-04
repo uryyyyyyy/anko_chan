@@ -1,7 +1,7 @@
 package com.github.uryyyyyyy.anko_chan.api.post.status
 
 import com.amazonaws.services.lambda.runtime.Context
-import com.github.uryyyyyyy.anko_chan.api.core.dto.Topic
+import com.github.uryyyyyyy.anko_chan.api.core.Topic
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
