@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/uryyyyyyy/nodeJsSamples",
   "dependencies": {
-    "aws-iot-device-sdk": "^1.0.9"
+    "aws-iot-device-sdk": "^1.0.9",
+    "mqtt": "^1.6.0"
   },
   "devDependencies": {
     "proxyquire": "^1.7.3",

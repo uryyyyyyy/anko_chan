@@ -7,9 +7,9 @@ const deviceModule = require('aws-iot-device-sdk').device;
 var topic = process.argv[2];
 
 const device = deviceModule({
-    keyPath: "/media/shiba/shibaHDD/develop/aws/IoT/cert2//thing-private-key.pem",
-    certPath: "/media/shiba/shibaHDD/develop/aws/IoT/cert2//cert.pem",
-    caPath: "/media/shiba/shibaHDD/develop/aws/IoT/cert2//rootCA.pem",
+    keyPath: "./cert/thing-private-key.pem",
+    certPath: "./cert/cert.pem",
+    caPath: "./cert/rootCA.pem",
     //clientId: clientId,
     region: "ap-northeast-1"
     //reconnectPeriod: reconnectPeriod

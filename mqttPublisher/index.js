@@ -30,7 +30,7 @@ var func = function(device, context){
         setTimeout(close,1000);
     });
 };
-
+console.log('start');
 const device = deviceModule({
     keyPath: "./cert/thing-private-key.pem",
     certPath: "./cert/cert.pem",
@@ -50,8 +50,8 @@ function processTest(status) {
         active: status.active }));
 }
 
-//func(device);
+func(device);
 
-exports.handler = function(event, context) {
-    func(device, context);
-};
+//exports.handler = function(event, context) {
+//    func(device, context);
+//};
